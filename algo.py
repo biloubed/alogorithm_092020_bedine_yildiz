@@ -1,69 +1,48 @@
 class FibonacciHeap:
     def __init__(self,tree):
-        self.tree   = []
-        self.branch = []
-        self.order  = 0
-
+        self.trees  = []
 
     def insert(self, value):
         i = 0
-        while i <= len(self.tree):
-            self.branch.append(value)
-            self.tree.append(self.branch)
+        while i <= len(self.trees):
+            self.trees.append([value])
             break
-        return self.tree
+        return self.trees
+
 
     def find_min(self):
         array_min = []
-        for val in self.tree:
-            print(val[2])
-        #     array_min.append(val[0])
-        #     array_min.append(val[1])
-        # print(array_min)
+        for val in self.trees:
+            array_min.append(val)
+        a = sorted(array_min)
+        return a[0]
 
 
-    # def delete_min(self):
-    #     smallest = self.least
-    #     if smallest is not None:
-    #         for child in smallest.child:
-    #             self.trees.append(child)
-    #         self.trees.remove(smallest)
-    #         if self.trees == []:
-    #             self.least = None
-    #         else:
-    #             self.least = self.trees[0]
-    #             self.consolidate()
-    #         self.count = self.count - 1
-    #         return smallest.value
-    #
-    #
-    # def merge(self, fibonnaci_heap):
-    #     aux = (floor_log(self.count) + 1) * [None]
-    #
-    #     while self.trees != []:
-    #         x = self.trees[0]
-    #         order = x.order
-    #         self.trees.remove(x)
-    #         while aux[order] is not None:
-    #             y = aux[order]
-    #             if x.value > y.value:
-    #                 x, y = y, x
-    #             x.add_at_end(y)
-    #             aux[order] = None
-    #             order = order + 1
-    #         aux[order] = x
-    #
-    #     self.least = None
-    #     for k in aux:
-    #         if k is not None:
-    #             self.trees.append(k)
-    #             if (self.least is None
-    #                     or k.value < self.least.value):
-    #                 self.least = k
+    def delete_min(self):
+        x = self.find_min()
+        for v in self.trees:
+            if x == v:
+                print(v)
+                min = v
+                self.trees.remove(v)
+                print("le minimum est suprimer")
+                return min[0]
+
+    def merge(self):
+        delete = self.delete_min()
+        print(delete)
+        print(self.trees)
+        for value in self.trees:
+            if value:
+                pass
+
+
+
 
 tab = []
 test = FibonacciHeap(tab)
-a    = test.insert(1)
-
-# c    = test.find_min()
-print(a)
+a = test.insert(123)
+b = test.insert(3)
+c = test.insert(34)
+d = test.insert(0)
+p = test.merge()

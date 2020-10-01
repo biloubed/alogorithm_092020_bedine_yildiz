@@ -1,8 +1,12 @@
-# Class to create a fibonacci tree and use it in the other class
+# Fibonacci Heap in python
+
+import math
+
+# Creating fibonacci tree
 class FibonacciTree:
     def __init__(self, value):
         self.value = value
-        self.child = [] # -> [[]]
+        self.child = []
         self.order = 0
 
     # Adding tree at the end of the tree
@@ -10,21 +14,30 @@ class FibonacciTree:
         self.child.append(t)
         self.order = self.order + 1
 
+
+# Creating Fibonacci heap
 class FibonacciHeap:
-    def insert(self, value):
+    def __init__(self):
+        self.trees = []
+        self.least = None
+        self.count = 0
+
+    # Insert a node
+    def insert_node(self, value):
         new_tree = FibonacciTree(value)
         self.trees.append(new_tree)
         if (self.least is None or value < self.least.value):
             self.least = new_tree
         self.count = self.count + 1
 
-
-    def find_min(self):
+    # Get minimum value
+    def get_min(self):
         if self.least is None:
             return None
         return self.least.value
 
-    def delete_min(self):
+    # Extract the minimum value
+    def extract_min(self):
         smallest = self.least
         if smallest is not None:
             for child in smallest.child:
@@ -38,8 +51,8 @@ class FibonacciHeap:
             self.count = self.count - 1
             return smallest.value
 
-
-    def merge(self, fibonnaci_heap):
+    # Consolidate the tree
+    def consolidate(self):
         aux = (floor_log(self.count) + 1) * [None]
 
         while self.trees != []:
@@ -64,16 +77,17 @@ class FibonacciHeap:
                     self.least = k
 
 
-# arbre = []
-# # arbre.append("bannae")
-# # arbre.append("kiwi")
-# # print(arbre)
-# object = FibonacciHeap()
-# object.insert(arbre,2)
-# print(object)
+def floor_log(x):
+    return math.frexp(x)[1] - 1
+
 
 fibonacci_heap = FibonacciHeap()
-fibonacci_heap.insert(7)
-fibonacci_heap.insert(3)
-fibonacci_heap.insert(17)
-fibonacci_heap.insert(24)
+
+fibonacci_heap.insert_node(7)
+fibonacci_heap.insert_node(3)
+fibonacci_heap.insert_node(17)
+fibonacci_heap.insert_node(24)
+
+print('the minimum value of the fibonacci heap: {}'.format(fibonacci_heap.get_min()))
+
+print('the minimum value removed: {}'.format(fibonacci_heap.extract_min()))
