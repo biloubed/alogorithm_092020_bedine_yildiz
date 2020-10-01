@@ -32,9 +32,17 @@ class FibonacciHeap:
         delete = self.delete_min()
         print(delete)
         print(self.trees)
-        for value in self.trees:
-            if value:
-                pass
+        for o in self.trees:
+            x = len(o)
+            print(x)
+            for v in self.trees:
+                y = len(v)
+                if x == y:
+                    self.trees[0].append(delete)
+        print(self.trees)
+        return self.trees
+
+
 
 
 
