@@ -1,8 +1,8 @@
-# Creating fibonacci tree
+# Class to create a fibonacci tree and use it in the other class
 class FibonacciTree:
     def __init__(self, value):
         self.value = value
-        self.child = []
+        self.child = [] # -> [[]]
         self.order = 0
 
     # Adding tree at the end of the tree
